@@ -5,15 +5,22 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.security.Key;
 import java.util.Date;
 
+
+
 @Service
 public class JwtService {
 
-    private final String SECRET = "my-super-secret-key-my-super-secret-key";
-    private final long EXPIRATION = 1000 * 60 * 60; // 1 valanda
+    @Value("${jwt.secret}")
+    private String SECRET;
+
+    @Value("${jwt.expiration}")
+    private long EXPIRATION;
+
 
     private Key getSignInKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());

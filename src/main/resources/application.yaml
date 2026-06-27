@@ -3,22 +3,22 @@ spring:
     name: heap
 
   datasource:
-    url: jdbc:mysql://localhost:3306/heap
-    username: root
-    password:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
 
-  #  MVC konfigūracija, kad REST API gražiai grąžintų 404 JSON
   mvc:
     throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 3600000
